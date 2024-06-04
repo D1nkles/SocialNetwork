@@ -7,14 +7,15 @@ namespace SocialNetwork
     class Program
     {
         public static UserService userService = new UserService();
+        public static MessageService messageService = new MessageService();
         static void Main(string[] args)
         {
             Console.WriteLine("Добро пожаловать в нашу соц-сеть\n\n");
 
             while (true)
             {
-                Console.WriteLine("Войти в профиль (нажмите 1)");
-                Console.WriteLine("Зарегистрироваться (нажмите 2)");
+                Console.WriteLine("Войти в профиль (введите 1)");
+                Console.WriteLine("Зарегистрироваться (введите 2)");
 
                 switch (Console.ReadLine())
                 {
@@ -42,7 +43,8 @@ namespace SocialNetwork
                                     Console.WriteLine("Редактировать мой профиль (введите 2)");
                                     Console.WriteLine("Добавить в друзья (введите 3)");
                                     Console.WriteLine("Написать сообщение (введите 4)");
-                                    Console.WriteLine("Выйти из профиля (введите 5)");
+                                    Console.WriteLine("Посмотреть сообщения (введите 5)");
+                                    Console.WriteLine("Выйти из профиля (введите 6)");
 
                                     switch (Console.ReadLine())
                                     {
@@ -84,6 +86,58 @@ namespace SocialNetwork
                                                 Console.WriteLine("Ваш профиль успешно обновлён!");
                                                 Console.ForegroundColor = ConsoleColor.White;
 
+                                                break;
+                                            }
+                                        case "4":
+                                            {
+                                                MessageData message = new MessageData();
+
+                                                message.SenderId = user.Id;
+
+                                                Console.Write("Введите адрес электронной почты получателя: ");
+                                                message.RecipientEmail = Console.ReadLine();
+
+                                                Console.Write("Введите текст сообщения: ");
+                                                message.Content = Console.ReadLine();
+                                                try 
+                                                {
+                                                    messageService.SendMessage(message);
+                                                }
+                                                catch (ArgumentNullException) 
+                                                {
+                                                    Console.ForegroundColor = ConsoleColor.Red;
+                                                    Console.WriteLine("Ошибка! Введены некорректные данные.");
+                                                    Console.ForegroundColor = ConsoleColor.White;
+                                                }
+                                                catch(UserNotFoundException) 
+                                                {
+                                                    Console.ForegroundColor = ConsoleColor.Red;
+                                                    Console.WriteLine("Ошибка! Получатель с такой почтой не зарегистрирован.");
+                                                    Console.ForegroundColor = ConsoleColor.White;
+                                                }
+                                                catch (ArgumentOutOfRangeException) 
+                                                {
+                                                    Console.ForegroundColor = ConsoleColor.Red;
+                                                    Console.WriteLine("Ошибка! Превышена максимальная длина сообщения.");
+                                                    Console.ForegroundColor = ConsoleColor.White;
+                                                }
+                                                catch (Exception) 
+                                                {
+                                                    Console.ForegroundColor = ConsoleColor.Red;
+                                                    Console.WriteLine("Произошла ошибка при отправке сообщения.");
+                                                    Console.ForegroundColor = ConsoleColor.White;
+                                                }
+                                                break;
+                                            
+                                            }
+                                        case "5":
+                                            {
+                                                var receivedMessages = messageService.GetReceivedMessages(user);
+                                                foreach (var receivedMessage in receivedMessages)
+                                                {
+                                                    Console.WriteLine($"Id отправителя: {receivedMessage.sender_id}\n" +
+                                                        $"Сообщение: {receivedMessage.content}\n");
+                                                }
                                                 break;
                                             }
                                     }
