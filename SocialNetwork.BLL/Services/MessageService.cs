@@ -47,5 +47,21 @@ namespace SocialNetwork.BLL.Services
             var messages = _messageRepository.FindByRecipientId(user.Id);
             return messages;
         }
+
+        public int GetReceivedMessagesCount(User user) 
+        {
+            return GetReceivedMessages(user).Count();
+        }
+
+        public IEnumerable<MessageEntity> GetSentMessages(User user)
+        {
+            var messages = _messageRepository.FindBySenderId(user.Id);
+            return messages;
+        }
+
+        public int GetSentMessagesCount(User user)
+        {
+            return GetSentMessages(user).Count();
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using SocialNetwork.BLL.Models;
 using SocialNetwork.BLL.Services;
+using SocialNetwork.DAL.Entities;
 
 namespace SocialNetwork.PLL.Views
 {
@@ -19,11 +20,11 @@ namespace SocialNetwork.PLL.Views
             if (receivedMessages.Count() == 0)
                 Console.WriteLine("\nВходящих сообщений нет.\n");
             else
-            foreach (var receivedMessage in receivedMessages)
-            {
-                Console.WriteLine($"\nId отправителя: {receivedMessage.sender_id}\n" +
-                    $"Сообщение: {receivedMessage.content}\n");
-            }
+                foreach (MessageEntity receivedMessage in receivedMessages)
+                {
+                    Console.WriteLine($"\nId отправителя: {receivedMessage.sender_id}\n" +
+                        $"Сообщение: {receivedMessage.content}\n");
+                }
         }
     }
 }
