@@ -6,7 +6,7 @@ namespace SocialNetwork.PLL.Views
     {
         public void Show(User user) 
         {
-            Console.WriteLine("Информация о моем профиле");
+            Console.WriteLine("\n==Информация о моем профиле==");
             Console.WriteLine($"Мой идентификатор: {user.Id}");
             Console.WriteLine($"Меня зовут: {user.FirstName}");
             Console.WriteLine($"Моя фамилия: {user.LastName}");
@@ -14,7 +14,7 @@ namespace SocialNetwork.PLL.Views
             Console.WriteLine($"Мой почтовый адрес: {user.Email}");
             Console.WriteLine($"Ссылка на моё фото: {user.Photo}");
             Console.WriteLine($"Мой любимый фильм: {user.FavoriteMovie}");
-            Console.WriteLine($"Моя любимая книга: {user.FavoriteBook}");
+            Console.WriteLine($"Моя любимая книга: {user.FavoriteBook}\n");
         }
     }
 }

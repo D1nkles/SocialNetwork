@@ -33,15 +33,15 @@ namespace SocialNetwork.PLL.Views
             {
                 _userService.Register(userRegistrationData);
 
-                SuccessMessage.ShowMessage("Ваш профиль успешно создан. Теперь Вы можете войти в систему под своими учетными данными.");
+                SuccessMessage.ShowMessage("Ваш профиль успешно создан. Теперь Вы можете войти в систему под своими учетными данными.\n");
             }
             catch (ArgumentNullException)
             {
-                ErrorMessage.ShowMessage("Введите корректное значение.");
+                ErrorMessage.ShowMessage("Введите корректное значение.\n");
             }
             catch (Exception)
             {
-                ErrorMessage.ShowMessage("Произошла ошибка при регистрации.");
+                ErrorMessage.ShowMessage("Произошла ошибка при регистрации.\n");
             }
         }
     }

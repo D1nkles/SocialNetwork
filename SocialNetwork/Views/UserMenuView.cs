@@ -16,12 +16,12 @@ namespace SocialNetwork.PLL.Views
             _isLogged = true;
             while (_isLogged == true)
             {
-                Console.WriteLine("Просмотреть информацию о моём профиле (введите 1)");
-                Console.WriteLine("Редактировать мой профиль (введите 2)");
-                Console.WriteLine("Добавить в друзья (введите 3)");
-                Console.WriteLine("Написать сообщение (введите 4)");
-                Console.WriteLine("Посмотреть входящие сообщения (введите 5)");
-                Console.WriteLine("Выйти из профиля (введите 6)");
+                Console.WriteLine(">>Просмотреть информацию о моём профиле (введите 1)");
+                Console.WriteLine(">>Редактировать мой профиль (введите 2)");
+                Console.WriteLine(">>Добавить в друзья (введите 3)");
+                Console.WriteLine(">>Написать сообщение (введите 4)");
+                Console.WriteLine(">>Посмотреть входящие сообщения (введите 5)");
+                Console.WriteLine(">>Выйти из профиля (введите 6)");
 
                 switch (Console.ReadLine()) 
                 {

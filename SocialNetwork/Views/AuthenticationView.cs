@@ -29,17 +29,17 @@ namespace SocialNetwork.PLL.Views
                 User user = userService.Authenticate(authenticationData);
 
                 SuccessMessage.ShowMessage($"Вы успешно вошли в социальную сеть! " +
-                    $"Добро пожаловать {user.FirstName}.");
+                    $"Добро пожаловать {user.FirstName}.\n");
 
                 Program.userMenuView.Show(user);
             }
             catch (WrongPasswordException)
             {
-                ErrorMessage.ShowMessage("Пароль не корректный!");
+                ErrorMessage.ShowMessage("Пароль не корректный!\n");
             }
             catch (UserNotFoundException)
             {
-                ErrorMessage.ShowMessage("Пользователь не найден!");
+                ErrorMessage.ShowMessage("Пользователь не найден!\n");
             }
         }
     }

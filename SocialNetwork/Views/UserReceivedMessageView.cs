@@ -17,7 +17,7 @@ namespace SocialNetwork.PLL.Views
             var receivedMessages = _messageService.GetReceivedMessages(user);
             foreach (var receivedMessage in receivedMessages)
             {
-                Console.WriteLine($"Id отправителя: {receivedMessage.sender_id}\n" +
+                Console.WriteLine($"\nId отправителя: {receivedMessage.sender_id}\n" +
                     $"Сообщение: {receivedMessage.content}\n");
             }
         }

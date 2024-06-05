@@ -32,23 +32,23 @@ namespace SocialNetwork.PLL.Views
             {
                 _messageService.SendMessage(message);
 
-                SuccessMessage.ShowMessage("Сообщение успешно отправленно!");
+                SuccessMessage.ShowMessage("Сообщение успешно отправленно!\n");
             }
             catch (ArgumentNullException)
             {
-                ErrorMessage.ShowMessage("Ошибка! Введены некорректные данные.");
+                ErrorMessage.ShowMessage("Ошибка! Введены некорректные данные.\n");
             }
             catch (UserNotFoundException)
             {
-                ErrorMessage.ShowMessage("Ошибка! Получатель с такой почтой не зарегистрирован.");
+                ErrorMessage.ShowMessage("Ошибка! Получатель с такой почтой не зарегистрирован.\n");
             }
             catch (ArgumentOutOfRangeException)
             {
-                ErrorMessage.ShowMessage("Ошибка! Превышена максимальная длина сообщения.");
+                ErrorMessage.ShowMessage("Ошибка! Превышена максимальная длина сообщения.\n");
             }
             catch (Exception)
             {
-                ErrorMessage.ShowMessage("Произошла ошибка при отправке сообщения.");
+                ErrorMessage.ShowMessage("Произошла ошибка при отправке сообщения.\n");
             }
         }
     }
