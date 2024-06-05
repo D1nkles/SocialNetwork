@@ -6,13 +6,15 @@ namespace SocialNetwork.PLL.Views
     public class UserMenuView
     {
         UserService _userService;
+        bool _isLogged;
         public UserMenuView(UserService userService)
         {
             _userService = userService;
         }
         public void Show(User user)
         {
-            while (true)
+            _isLogged = true;
+            while (_isLogged == true)
             {
                 Console.WriteLine("Просмотреть информацию о моём профиле (введите 1)");
                 Console.WriteLine("Редактировать мой профиль (введите 2)");
@@ -24,7 +26,7 @@ namespace SocialNetwork.PLL.Views
                 switch (Console.ReadLine()) 
                 {
                     case "6":
-                        Program.mainView.Show(); 
+                        _isLogged = false;
                         break;
 
                     case "1":
