@@ -15,16 +15,19 @@ namespace SocialNetwork.PLL.Views
 
         public void Show(User user) 
         {
-            var receivedMessages = _messageService.GetReceivedMessages(user);
 
-            if (receivedMessages.Count() == 0)
+            if (_messageService.GetReceivedMessagesCount(user) == 0)
                 Console.WriteLine("\nВходящих сообщений нет.\n");
             else
+            {
+                var receivedMessages = _messageService.GetReceivedMessages(user);
+
                 foreach (MessageEntity receivedMessage in receivedMessages)
                 {
                     Console.WriteLine($"\nId отправителя: {receivedMessage.sender_id}\n" +
                         $"Сообщение: {receivedMessage.content}\n");
                 }
+            }
         }
     }
 }

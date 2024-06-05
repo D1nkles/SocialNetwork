@@ -7,11 +7,13 @@ namespace SocialNetwork.PLL.Views
     {
         UserService _userService;
         MessageService _messageService;
+        FriendService _friendService;
         bool _isLogged;
-        public UserMenuView(UserService userService, MessageService messageService)
+        public UserMenuView(UserService userService, MessageService messageService, FriendService friendService)
         {
             _userService = userService;
             _messageService = messageService;
+            _friendService = friendService;
         }
         public void Show(User user)
         {
@@ -19,19 +21,21 @@ namespace SocialNetwork.PLL.Views
             while (_isLogged == true)
             {
                 Console.WriteLine($"Входящих сообщений - {_messageService.GetReceivedMessagesCount(user)}");
-                Console.WriteLine($"Отправленных сообщений - {_messageService.GetSentMessagesCount(user)}\n");
+                Console.WriteLine($"Отправленных сообщений - {_messageService.GetSentMessagesCount(user)}");
+                Console.WriteLine($"Заявок в друзья - {_friendService.GetFriendRequestsCount(user)}\n");
 
                 Console.WriteLine(">>Просмотреть информацию о моём профиле (введите 1)");
                 Console.WriteLine(">>Редактировать мой профиль (введите 2)");
-                Console.WriteLine(">>Добавить в друзья (введите 3)");
-                Console.WriteLine(">>Написать сообщение (введите 4)");
-                Console.WriteLine(">>Посмотреть входящие сообщения (введите 5)");
-                Console.WriteLine(">>Посмотреть отправленные сообщения (введите 6)");
-                Console.WriteLine(">>Выйти из профиля (введите 7)");
+                Console.WriteLine(">>Отправить заявку в друзья (введите 3)");
+                Console.WriteLine(">>Принять заявку в друзья (введите 4)");
+                Console.WriteLine(">>Написать сообщение (введите 5)");
+                Console.WriteLine(">>Посмотреть входящие сообщения (введите 6)");
+                Console.WriteLine(">>Посмотреть отправленные сообщения (введите 7)");
+                Console.WriteLine(">>Выйти из профиля (введите 8)");
 
                 switch (Console.ReadLine()) 
                 {
-                    case "7":
+                    case "8":
                         _isLogged = false;
                         break;
 
@@ -43,15 +47,23 @@ namespace SocialNetwork.PLL.Views
                         Program.userDataUpdateView.Show(user);
                         break;
 
+                    case "3":
+                        Program.userFriendRequestSendingView.Show(user);
+                        break;
+
                     case "4":
-                        Program.messageSendingView.Show(user);
+                        Program.userFriendRequestAcceptingView.Show(user);
                         break;
 
                     case "5":
-                        Program.userReceivedMessageView.Show(user);
+                        Program.messageSendingView.Show(user);
                         break;
 
                     case "6":
+                        Program.userReceivedMessageView.Show(user);
+                        break;
+
+                    case "7":
                         Program.userSentMessageView.Show(user);
                         break;
                 }
