@@ -2,16 +2,19 @@
 using SocialNetwork.BLL.Services;
 using SocialNetwork.DAL.Entities;
 using SocialNetwork.PLL.AlertWriters;
+using System.Reflection.Metadata;
 
 namespace SocialNetwork.PLL.Views
 {
     public class UserFriendRequestAcceptingView
     {
         FriendService _friendService;
+        UserService _userService;
 
-        public UserFriendRequestAcceptingView(FriendService friendService)
+        public UserFriendRequestAcceptingView(FriendService friendService, UserService userService)
         {
             _friendService = friendService;
+            _userService = userService;
         }
 
         public void Show(User user) 
@@ -24,7 +27,8 @@ namespace SocialNetwork.PLL.Views
                 
                 foreach (KeyValuePair<string, FriendEntity> request in requestList) 
                 {
-                    Console.WriteLine($"\n№{request.Key}. Пользователь с Id {request.Value.user_id} хочет добавить вас в друзья\n");
+                    var friend = _userService.FindById(request.Value.user_id);
+                    Console.WriteLine($"\n№{request.Key}. Пользователь {friend.FirstName} {friend.LastName} хочет добавить вас в друзья\n");
                 }
                 Console.WriteLine("Одобрить заявку (введите номер заявки)\n" +
                                   "Вернуться в меню пользователя (введите 0)");

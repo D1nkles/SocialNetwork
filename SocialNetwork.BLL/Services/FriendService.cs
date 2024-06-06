@@ -40,27 +40,28 @@ namespace SocialNetwork.BLL.Services
 
         public Dictionary<string, FriendEntity> GetFriendRequests(User user) 
         {
-            var requesters = _friendRepository.FindAllByFriendId(user.Id).ToList();
+            var friendsAndRequesters = _friendRepository.FindAllByFriendId(user.Id).ToList();
             //Вот здесь добавил обработку этого случая
-            if (requesters.Count == 0)
+            if (friendsAndRequesters.Count == 0)
             {
                 return new Dictionary<string, FriendEntity>();
             }
 
+            var requests = new List<FriendEntity>();
             var requestDictionary = new Dictionary<string, FriendEntity>();
             int requestNum = 1;
 
-            foreach (FriendEntity friend in requesters) 
+            foreach (FriendEntity friend in friendsAndRequesters) 
             {
                 bool check = CheckIfFriendAlready(friend.user_id, user.Id);
-                if (check)
-                    requesters.Remove(friend);
+                if (!check)
+                    requests.Add(friend);
 
-                if (requesters.Count == 0)
+                if (friendsAndRequesters.Count == 0)
                     return requestDictionary;
             }
 
-            foreach (FriendEntity friend in requesters) 
+            foreach (FriendEntity friend in requests) 
             {
                 requestDictionary.Add(requestNum.ToString(), friend);
                 requestNum++;
@@ -108,6 +109,19 @@ namespace SocialNetwork.BLL.Services
                     return true;
             }
             return false;
+        }
+
+        public List<UserEntity> GetFriendsInfo(int userId) 
+        {
+            var friends = GetAllFriends(userId);
+            var friendsInfo = new List<UserEntity>();
+
+            foreach(FriendEntity friend in friends)
+            {
+                var friendInfo = _userRepository.FindById(friend.friend_id);
+                friendsInfo.Add(friendInfo);
+            }
+            return friendsInfo;
         }
 
         public IEnumerable<FriendEntity> GetAllFriends(int userId) 

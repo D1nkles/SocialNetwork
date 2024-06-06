@@ -72,6 +72,14 @@ namespace SocialNetwork.BLL.Services
             return ConstructUserModel(findUserEntity);
         }
 
+        public User FindById(int userId) 
+        {
+            var findUserEntity = _userRepository.FindById(userId);
+            if (findUserEntity is null) throw new UserNotFoundException();
+
+            return ConstructUserModel(findUserEntity);
+        }
+
         public void Update(User user)
         {
             var updatableUserEntity = new UserEntity()

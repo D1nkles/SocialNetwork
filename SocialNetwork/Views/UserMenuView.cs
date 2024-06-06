@@ -28,14 +28,15 @@ namespace SocialNetwork.PLL.Views
                 Console.WriteLine(">>Редактировать мой профиль (введите 2)");
                 Console.WriteLine(">>Отправить заявку в друзья (введите 3)");
                 Console.WriteLine(">>Принять заявку в друзья (введите 4)");
-                Console.WriteLine(">>Написать сообщение (введите 5)");
-                Console.WriteLine(">>Посмотреть входящие сообщения (введите 6)");
-                Console.WriteLine(">>Посмотреть отправленные сообщения (введите 7)");
-                Console.WriteLine(">>Выйти из профиля (введите 8)");
+                Console.WriteLine(">>Посмотреть список друзей (введите 5)");
+                Console.WriteLine(">>Написать сообщение (введите 6)");
+                Console.WriteLine(">>Посмотреть входящие сообщения (введите 7)");
+                Console.WriteLine(">>Посмотреть отправленные сообщения (введите 8)");
+                Console.WriteLine(">>Выйти из профиля (введите 9)");
 
                 switch (Console.ReadLine()) 
                 {
-                    case "8":
+                    case "9":
                         _isLogged = false;
                         break;
 
@@ -56,14 +57,18 @@ namespace SocialNetwork.PLL.Views
                         break;
 
                     case "5":
-                        Program.messageSendingView.Show(user);
+                        Program.userFriendListView.Show(user);
                         break;
 
                     case "6":
-                        Program.userReceivedMessageView.Show(user);
+                        Program.messageSendingView.Show(user);
                         break;
 
                     case "7":
+                        Program.userReceivedMessageView.Show(user);
+                        break;
+
+                    case "8":
                         Program.userSentMessageView.Show(user);
                         break;
                 }

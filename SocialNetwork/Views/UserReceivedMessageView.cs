@@ -7,10 +7,12 @@ namespace SocialNetwork.PLL.Views
     public class UserReceivedMessageView
     {
         MessageService _messageService;
+        UserService _userService;
 
-        public UserReceivedMessageView(MessageService messageService) 
+        public UserReceivedMessageView(MessageService messageService, UserService userService) 
         {
             _messageService = messageService;
+            _userService = userService;
         }
 
         public void Show(User user) 
@@ -24,7 +26,8 @@ namespace SocialNetwork.PLL.Views
 
                 foreach (MessageEntity receivedMessage in receivedMessages)
                 {
-                    Console.WriteLine($"\nId отправителя: {receivedMessage.sender_id}\n" +
+                    var sender = _userService.FindById(receivedMessage.sender_id);
+                    Console.WriteLine($"\nОтправитель: {sender.FirstName} {sender.LastName}\n" +
                         $"Сообщение: {receivedMessage.content}\n");
                 }
             }
